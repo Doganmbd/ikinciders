@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import SearchBar from "./SearchBar"
+import MovieList from "./MovieList"
+import {data} from "./Data"
 
-function App() {
+const App = () => {
+  
+const [list, setList] = useState(data);
+
+const handleRemoveItem = (e) => {
+  
+ 
+   const nametwo = list.filter(itemssss => itemssss.id !== e);
+   console.log(nametwo.id);
+ /*   console.log(id); */
+   setList(
+      nametwo
+   )
+  };
+
+console.log(list);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div className = "container">
+      <div className="row">
+        <div className="col-lg-12">
+          <SearchBar/>
+     
+         
+      {list.map((country) => {
+       return(
+      <MovieList 
+      keyProp={country.id} 
+      ad ={country.title} 
+      aciklama={country.desc} 
+      resim ={country.image}
+      handleRemoveProp={handleRemoveItem}
+
+      
+      /> ) 
+      } ) }
+      </div>
     </div>
-  );
+     
+  </div>
+  </>
+   )
 }
 
-export default App;
+export default App
+
